@@ -42,8 +42,9 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 48px); line-height: 1; letter-spacin
 .search-field input:focus { border-color: var(--ink); box-shadow: 0 0 0 2px rgba(0,0,0,.06); }
 .search-field kbd { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); border: 1px solid #ddd; border-radius: 4px; padding: 1px 6px; color: #777; background: var(--soft); font: 11px ui-monospace, monospace; }
 .filters { display: flex; gap: 7px; flex-wrap: wrap; }
-.taxonomy-filters { flex-basis: 100%; border-top: 1px solid #e6e6e6; padding-top: 11px; }
-.taxonomy-filters::before, .genre-filters::before { align-self: center; width: 44px; color: #888; font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+.region-filters, .taxonomy-filters { flex-basis: 100%; border-top: 1px solid #e6e6e6; padding-top: 11px; }
+.region-filters::before, .taxonomy-filters::before, .genre-filters::before { align-self: center; width: 44px; color: #888; font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+.region-filters::before { content: "地區"; }
 .taxonomy-filters::before { content: "內容"; }
 .genre-filters { flex-basis: 100%; padding-left: 0; }
 .genre-filters[hidden] { display: none; }
