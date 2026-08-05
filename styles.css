@@ -61,7 +61,8 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 48px); line-height: 1; letter-spacin
 .station { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 12px; min-height: 88px; border: 1px solid var(--line); border-radius: 11px; padding: 12px; background: #fff; transition: border-color .15s, transform .15s; }
 .station:hover { border-color: var(--ink); transform: translateY(-1px); }
 .station.is-playing { border-color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
-.station-mark { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; overflow: hidden; border-radius: 50%; padding: 5px; background: var(--soft); font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.02em; line-height: 1.05; overflow-wrap: anywhere; text-align: center; }
+.station-mark { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; overflow: hidden; border-radius: 50%; padding: 4px; background: var(--soft); font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.02em; line-height: 1; text-align: center; white-space: nowrap; }
+.station-mark.is-long { padding: 2px; font-size: 10px; letter-spacing: -.06em; }
 .station-info { min-width: 0; }
 .station-name { margin: 0; overflow: hidden; font-size: 15px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .station-meta { display: flex; align-items: center; gap: 7px; margin-top: 5px; color: var(--muted); font-size: 11px; }

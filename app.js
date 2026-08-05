@@ -108,13 +108,15 @@ function renderStations() {
     const isDirect = station.mode === 'direct';
     const isPlaying = state.current?.id === station.id;
     const isFavorite = state.favorites.has(station.id);
+    const compactShortName = station.shortName.replace(/\s+/g, '');
+    const markClass = compactShortName.length > 5 ? ' is-long' : '';
     const action = isDirect
       ? `<button class="listen-button" type="button" data-play="${station.id}">${isPlaying ? '正在播放' : '播放'}</button>`
       : `<a class="listen-button" href="${station.official}" target="_blank" rel="noreferrer">官方直播 ↗</a>`;
 
     return `
       <article class="station ${isPlaying ? 'is-playing' : ''}">
-        <div class="station-mark" aria-hidden="true">${station.shortName}</div>
+        <div class="station-mark${markClass}" aria-hidden="true">${compactShortName}</div>
         <div class="station-info">
           <h2 class="station-name">${station.name}</h2>
           <div class="station-meta">
