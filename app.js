@@ -76,7 +76,7 @@ function matchesContent(station, content) {
 }
 
 function renderFilters() {
-  const regions = ['全部', '中央', '京津', '廣東', '江浙滬', '香港', '台灣', '美國', '英國', '法國'].filter(name => name === '全部' || state.stations.some(station => station.region === name));
+  const regions = ['全部', '中央', '京津', '廣東', '江浙滬', '香港', '台灣', '美國', '英國', '法國', '瑞士'].filter(name => name === '全部' || state.stations.some(station => station.region === name));
   elements.regionFilters.innerHTML = regions.map(name => `
     <button class="chip ${state.region === name ? 'active' : ''}" type="button" data-region="${name}">${name}</button>
   `).join('');
