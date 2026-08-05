@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="一個簡潔的網絡電台聚合播放器，收錄可在瀏覽器直接播放的公開直播頻道。">
+  <title>Web Radio</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="intro">
+      <div class="eyebrow">LIVE RADIO DIRECTORY</div>
+      <div class="title-row">
+        <h1>Web Radio</h1>
+        <span class="on-air"><i></i> LIVE</span>
+      </div>
+      <p>一個簡潔的網絡電台入口。本站不儲存或轉播音訊；播放時，你的瀏覽器會直接連接電台或公開音訊服務的直播源。</p>
+    </header>
+
+    <section class="toolbar" aria-label="篩選電台">
+      <label class="search-field">
+        <span class="sr-only">搜尋電台</span>
+        <input id="searchInput" type="search" placeholder="搜尋電台、語言或頻道" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <div id="regionFilters" class="filters" role="group" aria-label="按地區篩選"></div>
+      <div id="broadcasterFilters" class="filters secondary-filters" role="group" aria-label="按廣播機構篩選"></div>
+      <div id="contentFilters" class="filters taxonomy-filters" role="group" aria-label="按內容類型篩選"></div>
+      <div id="genreFilters" class="filters genre-filters" role="group" aria-label="按音樂風格篩選" hidden></div>
+    </section>
+
+    <div class="summary">
+      <span id="resultCount">正在載入頻道…</span>
+      <button id="favoritesToggle" class="text-button" type="button" aria-pressed="false">只看收藏</button>
+    </div>
+
+    <div id="stationList" class="station-list" aria-live="polite"></div>
+
+    <footer>
+      <p>只收錄已驗證可在瀏覽器直接播放的公開直播。直播可用性取決於各電台及分發服務；如有錯漏，請以廣播機構官方資訊為準。</p>
+      <span id="channelTotal"></span>
+    </footer>
+  </main>
+
+  <aside id="player" class="player" aria-label="播放器" hidden>
+    <div class="player-inner">
+      <button id="playToggle" class="play-toggle" type="button" aria-label="播放">▶</button>
+      <div class="now-playing">
+        <div class="now-label">NOW PLAYING</div>
+        <div id="nowName" class="now-name">—</div>
+        <div id="playerStatus" class="player-status">準備播放</div>
+      </div>
+      <label class="volume">
+        <span class="sr-only">音量</span>
+        <span aria-hidden="true">VOL</span>
+        <input id="volumeControl" type="range" min="0" max="1" step="0.05" value="0.85">
+      </label>
+      <button id="debugToggle" class="debug-toggle" type="button" aria-expanded="false" aria-controls="debugPanel">DEBUG</button>
+      <button id="closePlayer" class="close-player" type="button" aria-label="關閉播放器">×</button>
+    </div>
+    <section id="debugPanel" class="debug-panel" hidden aria-label="播放除錯資訊">
+      <div class="debug-head">
+        <strong>Playback debug</strong>
+        <div>
+          <button id="copyDebug" type="button">複製記錄</button>
+          <button id="clearDebug" type="button">清除</button>
+        </div>
+      </div>
+      <pre id="debugLog"></pre>
+    </section>
+    <audio id="audio" preload="none"></audio>
+  </aside>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.13/dist/hls.min.js"></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
