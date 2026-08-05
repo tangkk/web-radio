@@ -79,7 +79,7 @@ function matchesContent(station, content) {
 }
 
 function renderFilters() {
-  const regions = ['全部', '中央', '廣東', '香港', '台灣', '美國', '法國'].filter(name => name === '全部' || state.stations.some(station => station.region === name));
+  const regions = ['全部', '中央', '廣東', '香港', '台灣', '美國', '英國', '法國'].filter(name => name === '全部' || state.stations.some(station => station.region === name));
   const regionalStations = state.region === '全部' ? state.stations : state.stations.filter(station => station.region === state.region);
   const broadcasters = ['全部', ...new Set(regionalStations.map(station => station.broadcaster))];
   elements.regionFilters.innerHTML = regions.map(name => `

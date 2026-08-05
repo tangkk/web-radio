@@ -1,6 +1,6 @@
 # Web Radio
 
-A small, static directory and player for browser-compatible live radio channels. The collection covers central, Guangdong, Hong Kong, Taiwan, Chinese-language stations in the United States, and a curated selection of established music stations. Audio is never proxied or stored: stations play directly from their public stream provider.
+A small, static directory and player for browser-compatible live radio channels. The collection covers central, Guangdong, Hong Kong, Taiwan, Chinese-language stations in the United States, and a curated selection of established music stations from the United Kingdom, France, and elsewhere. Audio is never proxied or stored: stations play directly from their public stream provider.
 
 ## Local preview
 
