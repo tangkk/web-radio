@@ -2,7 +2,6 @@ const state = {
   stations: [],
   query: '',
   region: '全部',
-  broadcaster: '全部',
   content: '全部內容',
   genre: '全部風格',
   favoritesOnly: false,
@@ -14,7 +13,6 @@ const state = {
 const elements = {
   list: document.querySelector('#stationList'),
   regionFilters: document.querySelector('#regionFilters'),
-  broadcasterFilters: document.querySelector('#broadcasterFilters'),
   contentFilters: document.querySelector('#contentFilters'),
   genreFilters: document.querySelector('#genreFilters'),
   search: document.querySelector('#searchInput'),
@@ -59,7 +57,6 @@ function visibleStations() {
     const haystack = normalized([station.name, station.broadcaster, station.region, station.market, station.language, station.frequency, ...(station.category || []), ...(station.genres || [])].join(' '));
     return (!state.query || haystack.includes(normalized(state.query)))
       && (state.region === '全部' || station.region === state.region)
-      && (state.broadcaster === '全部' || station.broadcaster === state.broadcaster)
       && matchesContent(station, state.content)
       && (state.genre === '全部風格' || (station.genres || []).includes(state.genre))
       && (!state.favoritesOnly || state.favorites.has(station.id));
@@ -80,13 +77,8 @@ function matchesContent(station, content) {
 
 function renderFilters() {
   const regions = ['全部', '中央', '廣東', '香港', '台灣', '美國', '英國', '法國'].filter(name => name === '全部' || state.stations.some(station => station.region === name));
-  const regionalStations = state.region === '全部' ? state.stations : state.stations.filter(station => station.region === state.region);
-  const broadcasters = ['全部', ...new Set(regionalStations.map(station => station.broadcaster))];
   elements.regionFilters.innerHTML = regions.map(name => `
     <button class="chip ${state.region === name ? 'active' : ''}" type="button" data-region="${name}">${name}</button>
-  `).join('');
-  elements.broadcasterFilters.innerHTML = broadcasters.map(name => `
-    <button class="chip ${state.broadcaster === name ? 'active' : ''}" type="button" data-broadcaster="${name}">${name}</button>
   `).join('');
 
   const contents = ['全部內容', '音樂', '新聞・談話', '財經', '生活・公共'];
@@ -263,15 +255,6 @@ elements.regionFilters.addEventListener('click', event => {
   const button = event.target.closest('[data-region]');
   if (!button) return;
   state.region = button.dataset.region;
-  state.broadcaster = '全部';
-  renderFilters();
-  renderStations();
-});
-
-elements.broadcasterFilters.addEventListener('click', event => {
-  const button = event.target.closest('[data-broadcaster]');
-  if (!button) return;
-  state.broadcaster = button.dataset.broadcaster;
   renderFilters();
   renderStations();
 });
