@@ -1,8 +1,9 @@
 (() => {
-  const ARTWORK_URL = 'https://tangkk.github.io/me.jpg';
+  const ARTWORK_URL = 'https://avatars.githubusercontent.com/u/1814604?v=4&s=1024';
   const audio = document.querySelector('#audio');
+  let applyTimer = null;
 
-  function applyHighResolutionArtwork() {
+  function applyArtwork() {
     if (!('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
 
     const current = navigator.mediaSession.metadata;
@@ -11,16 +12,28 @@
       artist: current?.artist || 'Web Radio',
       album: current?.album || 'Web Radio',
       artwork: [
-        { src: ARTWORK_URL, sizes: '512x512', type: 'image/jpeg' },
         { src: ARTWORK_URL, sizes: '1024x1024', type: 'image/jpeg' }
       ]
     });
   }
 
-  audio?.addEventListener('playing', () => window.setTimeout(applyHighResolutionArtwork, 0));
+  function scheduleArtwork() {
+    if (applyTimer) window.clearTimeout(applyTimer);
+    applyTimer = window.setTimeout(applyArtwork, 150);
+  }
+
+  audio?.addEventListener('loadedmetadata', scheduleArtwork);
+  audio?.addEventListener('play', scheduleArtwork);
+  audio?.addEventListener('playing', scheduleArtwork);
+  audio?.addEventListener('pause', scheduleArtwork);
+
   document.addEventListener('click', event => {
-    if (event.target.closest('[data-play], [data-recent-play], [data-resume-station], [data-station-action]')) {
-      window.setTimeout(applyHighResolutionArtwork, 100);
+    if (event.target.closest('[data-play], [data-recent-play], [data-resume-station], [data-station-action], #playToggle')) {
+      scheduleArtwork();
     }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) scheduleArtwork();
   });
 })();
