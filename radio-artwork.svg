@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Web Radio</title>
+  <desc id="desc">High resolution Web Radio artwork for lock screen media controls.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111111"/>
+      <stop offset="1" stop-color="#2b2b2b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="58%">
+      <stop offset="0" stop-color="#ff6b4a" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#ff6b4a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#glow)"/>
+  <circle cx="512" cy="458" r="238" fill="none" stroke="#f5f5f5" stroke-width="34" opacity=".96"/>
+  <circle cx="512" cy="458" r="94" fill="#ff6b4a"/>
+  <path d="M512 314v288" stroke="#f5f5f5" stroke-width="34" stroke-linecap="round"/>
+  <path d="M382 368c-42 54-42 126 0 180M642 368c42 54 42 126 0 180" fill="none" stroke="#f5f5f5" stroke-width="30" stroke-linecap="round"/>
+  <path d="M294 302c-88 92-88 240 0 332M730 302c88 92 88 240 0 332" fill="none" stroke="#ff6b4a" stroke-width="28" stroke-linecap="round"/>
+  <text x="512" y="810" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="800" letter-spacing="8">WEB RADIO</text>
+  <text x="512" y="876" text-anchor="middle" fill="#bdbdbd" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="10">LIVE DIRECTORY</text>
+</svg>
