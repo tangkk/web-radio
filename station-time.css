@@ -1,0 +1,14 @@
+.station-local-time {
+  margin-top: 5px;
+  color: var(--accent);
+  font: 700 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .station-local-time {
+    margin-top: 4px;
+    font-size: 9px;
+  }
+}
