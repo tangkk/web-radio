@@ -1,6 +1,6 @@
 (() => {
   const STORAGE_KEY = 'web-radio-recents';
-  const MAX_RECENTS = 5;
+  const MAX_RECENTS = 10;
 
   function loadRecents() {
     try {
