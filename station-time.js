@@ -93,9 +93,19 @@
 
   async function initStationTimes() {
     try {
-      const response = await fetch('./stations.json');
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const stations = await response.json();
+      const [stationsResponse, timeZonesResponse] = await Promise.all([
+        fetch('./stations.json'),
+        fetch('./station-timezones.json')
+      ]);
+      if (!stationsResponse.ok) throw new Error(`Stations HTTP ${stationsResponse.status}`);
+      if (!timeZonesResponse.ok) throw new Error(`Time zones HTTP ${timeZonesResponse.status}`);
+
+      const stations = await stationsResponse.json();
+      const timeZones = await timeZonesResponse.json();
+      stations.forEach(station => {
+        if (timeZones[station.id]) station.timeZone = timeZones[station.id];
+      });
+
       stationsByName = new Map(stations.map(station => [station.name, station]));
       decorateCards();
 

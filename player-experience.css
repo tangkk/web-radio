@@ -1,0 +1,70 @@
+.resume-station {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 11px 13px;
+  background: var(--soft);
+}
+
+.resume-station div { min-width: 0; }
+.resume-station span { display: block; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.resume-station strong { display: block; overflow: hidden; margin-top: 2px; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.resume-station button { border: 1px solid var(--ink); border-radius: 999px; padding: 7px 11px; background: #fff; font-size: 11px; cursor: pointer; white-space: nowrap; }
+.resume-station button:hover { background: var(--ink); color: #fff; }
+
+.player-inner {
+  grid-template-columns: auto minmax(0,1fr) auto auto auto auto auto;
+}
+
+.station-navigation {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.station-navigation button {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.station-navigation button:hover { border-color: var(--ink); background: var(--soft); }
+
+.sleep-control { min-width: 104px; color: var(--muted); font-size: 9px; }
+.sleep-control label { display: flex; align-items: center; gap: 6px; font-weight: 700; }
+.sleep-control select { max-width: 82px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 7px; background: #fff; color: var(--ink); font-size: 10px; }
+.sleep-timer-status { display: block; margin-top: 3px; color: var(--accent); text-align: right; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto auto; }
+  .volume { display: none; }
+}
+
+@media (max-width: 680px) {
+  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto; gap: 8px; }
+  .debug-toggle { display: none; }
+  .sleep-control { min-width: 76px; }
+  .sleep-control label > span { display: none; }
+  .sleep-control select { max-width: 72px; padding-inline: 4px; font-size: 9px; }
+  .sleep-timer-status { font-size: 8px; }
+}
+
+@media (max-width: 520px) {
+  .player-inner { gap: 5px; }
+  .now-name { font-size: 13px; }
+  .station-navigation { gap: 2px; }
+  .station-navigation button { width: 27px; height: 27px; }
+  .sleep-control { min-width: 66px; }
+  .sleep-control select { max-width: 64px; font-size: 8px; }
+  .resume-station { align-items: flex-start; }
+}
