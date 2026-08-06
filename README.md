@@ -1,6 +1,6 @@
 # Web Radio
 
-A small, static directory and player for browser-compatible live radio channels. The collection covers Greater China and a curated international selection spanning the United States, Canada, the United Kingdom, Ireland, France, Switzerland, Australia, and South Africa. Audio is never proxied or stored: stations play directly from their public stream provider.
+A small, static directory and player for browser-compatible live radio channels. The collection covers Greater China and Malaysia, alongside a curated international selection spanning the United States, Canada, the United Kingdom, Ireland, France, Switzerland, Australia, and South Africa. Audio is never proxied or stored: stations play directly from their public stream provider.
 
 ## Local preview
 
