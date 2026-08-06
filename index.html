@@ -7,6 +7,7 @@
   <meta name="description" content="一個簡潔的網絡電台聚合播放器，收錄可在瀏覽器直接播放的公開直播頻道。">
   <title>Web Radio</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./recent.css">
 </head>
 <body>
   <main class="page">
@@ -28,6 +29,14 @@
       <div id="regionFilters" class="filters region-filters" role="group" aria-label="按地區篩選"></div>
       <div id="contentFilters" class="filters taxonomy-filters" role="group" aria-label="按內容類型篩選"></div>
       <div id="genreFilters" class="filters genre-filters" role="group" aria-label="按音樂風格篩選" hidden></div>
+    </section>
+
+    <section id="recentSection" class="recent-section" aria-labelledby="recentHeading" hidden>
+      <div class="recent-heading">
+        <h2 id="recentHeading">最近播放</h2>
+        <span>最多保留 5 個</span>
+      </div>
+      <div id="recentList" class="recent-list"></div>
     </section>
 
     <div class="summary">
@@ -74,5 +83,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.13/dist/hls.min.js"></script>
   <script src="./app.js" defer></script>
+  <script src="./recent.js" defer></script>
 </body>
 </html>
