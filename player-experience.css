@@ -46,14 +46,23 @@
 .sleep-timer-status { display: block; margin-top: 3px; color: var(--accent); text-align: right; white-space: nowrap; }
 
 @media (max-width: 900px) {
-  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto; }
-  .sleep-control, .volume { display: none; }
+  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto auto; }
+  .volume { display: none; }
 }
 
-@media (max-width: 560px) {
-  .player-inner { gap: 8px; }
+@media (max-width: 680px) {
+  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto; gap: 8px; }
+  .debug-toggle { display: none; }
+  .sleep-control { min-width: 82px; }
+  .sleep-control label > span { display: none; }
+  .sleep-control select { max-width: 76px; padding-inline: 5px; }
+  .sleep-timer-status { font-size: 8px; }
+}
+
+@media (max-width: 520px) {
+  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto; }
+  .sleep-control { display: none; }
   .station-navigation { gap: 3px; }
   .station-navigation button { width: 29px; height: 29px; }
-  .debug-toggle { display: none; }
   .resume-station { align-items: flex-start; }
 }
