@@ -53,16 +53,18 @@
 @media (max-width: 680px) {
   .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto; gap: 8px; }
   .debug-toggle { display: none; }
-  .sleep-control { min-width: 82px; }
+  .sleep-control { min-width: 76px; }
   .sleep-control label > span { display: none; }
-  .sleep-control select { max-width: 76px; padding-inline: 5px; }
+  .sleep-control select { max-width: 72px; padding-inline: 4px; font-size: 9px; }
   .sleep-timer-status { font-size: 8px; }
 }
 
 @media (max-width: 520px) {
-  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto; }
-  .sleep-control { display: none; }
-  .station-navigation { gap: 3px; }
-  .station-navigation button { width: 29px; height: 29px; }
+  .player-inner { gap: 5px; }
+  .now-name { font-size: 13px; }
+  .station-navigation { gap: 2px; }
+  .station-navigation button { width: 27px; height: 27px; }
+  .sleep-control { min-width: 66px; }
+  .sleep-control select { max-width: 64px; font-size: 8px; }
   .resume-station { align-items: flex-start; }
 }
