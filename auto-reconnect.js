@@ -163,7 +163,7 @@
     try {
       navigator.mediaSession.setActionHandler('play', () => {
         markPlayingIntent('media session play');
-        audio.play().catch(() => scheduleReconnect('media session play failed', true));
+        scheduleReconnect('media session play', true);
       });
       navigator.mediaSession.setActionHandler('pause', () => {
         markStopped('media session pause');
