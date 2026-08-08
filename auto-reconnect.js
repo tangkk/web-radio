@@ -158,15 +158,20 @@
     }
   });
 
-  // Media Session play/pause actions need to update reconnect intent too.
+  // Preserve the existing media session on lock-screen resume. Reconnect is a fallback only.
   if ('mediaSession' in navigator) {
     try {
       navigator.mediaSession.setActionHandler('play', () => {
         markPlayingIntent('media session play');
-        scheduleReconnect('media session play', true);
+        try { navigator.mediaSession.playbackState = 'playing'; } catch {}
+        const promise = audio.play();
+        if (promise?.catch) {
+          promise.catch(() => scheduleReconnect('media session play failed', true));
+        }
       });
       navigator.mediaSession.setActionHandler('pause', () => {
         markStopped('media session pause');
+        try { navigator.mediaSession.playbackState = 'paused'; } catch {}
         audio.pause();
       });
     } catch {}
