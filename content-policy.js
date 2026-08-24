@@ -61,7 +61,14 @@
     try {
       const stations = await response.clone().json();
       if (!Array.isArray(stations)) return response;
-      const filtered = stations.filter(station => !hiddenIds.has(station?.id));
+      const additions = await originalFetch('./stations-additions.json', { cache: 'no-store' })
+        .then(extra => extra.ok ? extra.json() : [])
+        .catch(() => []);
+      const merged = [...new Map([
+        ...stations,
+        ...(Array.isArray(additions) ? additions : [])
+      ].map(station => [station.id, station])).values()];
+      const filtered = merged.filter(station => !hiddenIds.has(station?.id));
       const headers = new Headers(response.headers);
       headers.set('content-type', 'application/json; charset=utf-8');
       return new Response(JSON.stringify(filtered), {
