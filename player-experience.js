@@ -77,6 +77,8 @@
           <option value="30">30 分鐘</option>
           <option value="45">45 分鐘</option>
           <option value="60">60 分鐘</option>
+          <option value="90">90 分鐘</option>
+          <option value="120">120 分鐘</option>
         </select>
       </label>
       <span id="sleepTimerStatus" class="sleep-timer-status"></span>
