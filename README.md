@@ -4,6 +4,12 @@ A small, static directory and player for browser-compatible live radio channels.
 
 ## Local preview
 
+Generate the crawlable station directory and sitemap after changing `stations.json`:
+
+```bash
+node scripts/generate-seo.mjs
+```
+
 Run any static file server in the repository root, for example:
 
 ```bash
