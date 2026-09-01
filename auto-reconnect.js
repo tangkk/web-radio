@@ -158,6 +158,12 @@
     }
   });
 
+  // The live stop control keeps the player bar open, so stop intent must be
+  // communicated separately from the close-player button.
+  document.addEventListener('web-radio:stopped', event => {
+    markStopped(event.detail?.reason || 'live stopped');
+  });
+
   // Preserve the existing media session on lock-screen resume. Reconnect is a fallback only.
   if ('mediaSession' in navigator) {
     try {
