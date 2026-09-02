@@ -7,7 +7,6 @@
   const volume = document.querySelector('#volumeControl');
   const search = document.querySelector('#searchInput');
   const stationList = document.querySelector('#stationList');
-  const summary = document.querySelector('.summary');
   let sleepTimer = null;
   let fadeTimer = null;
 
@@ -88,23 +87,6 @@
     nowPlaying?.after(navigation);
     const volumeControl = playerInner.querySelector('.volume');
     volumeControl?.before(sleep);
-  }
-
-  function buildResumeCard() {
-    const saved = loadState();
-    if (!saved.stationId || !summary || document.querySelector('#resumeStation')) return;
-    const button = stationList.querySelector(`[data-play="${CSS.escape(saved.stationId)}"]`);
-    const station = button?.closest('.station');
-    if (!station) return;
-    const name = station.querySelector('.station-name')?.textContent?.trim() || '上次收聽的電台';
-    const resume = document.createElement('section');
-    resume.id = 'resumeStation';
-    resume.className = 'resume-station';
-    resume.innerHTML = `
-      <div><span>上次收聽</span><strong>${name}</strong></div>
-      <button type="button" data-resume-station="${saved.stationId}">繼續播放</button>
-    `;
-    summary.before(resume);
   }
 
   function restoreFilters() {
@@ -215,8 +197,6 @@
       saveState({ stationId: play.dataset.play });
       window.setTimeout(updateMediaSession, 0);
     }
-    const resume = event.target.closest('[data-resume-station]');
-    if (resume) playById(resume.dataset.resumeStation);
     const action = event.target.closest('[data-station-action]')?.dataset.stationAction;
     if (action === 'previous') stepStation(-1);
     if (action === 'next') stepStation(1);
@@ -249,7 +229,6 @@
     if (!stationList.querySelector('.station')) return;
     observer.disconnect();
     restoreFilters();
-    window.setTimeout(buildResumeCard, 0);
   });
   observer.observe(stationList, { childList: true });
 
