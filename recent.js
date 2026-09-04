@@ -11,8 +11,9 @@
     }
   }
 
-  function saveRecents(recents) {
+  function saveRecents(recents, { dirty = true } = {}) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(recents.slice(0, MAX_RECENTS)));
+    if (dirty) document.dispatchEvent(new CustomEvent('web-radio:local-sync-dirty'));
   }
 
   function getStationFromCard(id) {
@@ -21,7 +22,8 @@
     return {
       id,
       name: card?.querySelector('.station-name')?.textContent?.trim() || id,
-      meta: card?.querySelector('.station-meta')?.textContent?.replace(/\s+/g, ' ')?.trim() || ''
+      meta: card?.querySelector('.station-meta')?.textContent?.replace(/\s+/g, ' ')?.trim() || '',
+      updatedAt: Date.now()
     };
   }
 
@@ -60,5 +62,6 @@
     if (typeof window.playStation === 'function') window.playStation(id);
   });
 
+  document.addEventListener('web-radio:recents-updated', renderRecents);
   renderRecents();
 })();
