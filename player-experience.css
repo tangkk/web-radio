@@ -49,3 +49,30 @@
   .sleep-control { min-width: 66px; }
   .sleep-control select { max-width: 64px; font-size: 8px; }
 }
+
+@media (min-width: 901px) {
+  .station-navigation,
+  .sleep-control,
+  .volume,
+  .debug-toggle,
+  .close-player {
+    align-self: center;
+  }
+
+  .sleep-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .sleep-control label {
+    flex: none;
+  }
+
+  .sleep-timer-status {
+    display: inline;
+    margin-top: 0;
+    text-align: left;
+  }
+}
