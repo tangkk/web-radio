@@ -9,6 +9,7 @@
   const stationList = document.querySelector('#stationList');
   let sleepTimer = null;
   let fadeTimer = null;
+  let restoringState = false;
 
   function loadState() {
     try {
@@ -20,7 +21,9 @@
 
   function saveState(patch) {
     const next = { ...loadState(), ...patch };
+    if (!restoringState) next._updatedAt = Date.now();
     localStorage.setItem(STATE_KEY, JSON.stringify(next));
+    if (!restoringState) document.dispatchEvent(new CustomEvent('web-radio:local-sync-dirty'));
     return next;
   }
 
@@ -91,24 +94,29 @@
 
   function restoreFilters() {
     const saved = loadState();
-    if (typeof saved.volume === 'number' && volume) {
-      volume.value = String(saved.volume);
-      volume.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-    if (typeof saved.query === 'string' && search) {
-      search.value = saved.query;
-      search.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-    const clickSaved = (selector, value) => {
-      if (!value) return;
-      const target = [...document.querySelectorAll(selector)].find(button => Object.values(button.dataset).includes(value));
-      target?.click();
-    };
-    clickSaved('[data-region]', saved.region);
-    clickSaved('[data-content]', saved.content);
-    clickSaved('[data-genre]', saved.genre);
-    if (saved.favoritesOnly && document.querySelector('#favoritesToggle')?.getAttribute('aria-pressed') !== 'true') {
-      document.querySelector('#favoritesToggle')?.click();
+    restoringState = true;
+    try {
+      if (typeof saved.volume === 'number' && volume) {
+        volume.value = String(saved.volume);
+        volume.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      if (typeof saved.query === 'string' && search) {
+        search.value = saved.query;
+        search.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      const clickSaved = (selector, value) => {
+        if (!value) return;
+        const target = [...document.querySelectorAll(selector)].find(button => Object.values(button.dataset).includes(value));
+        target?.click();
+      };
+      clickSaved('[data-region]', saved.region);
+      clickSaved('[data-content]', saved.content);
+      clickSaved('[data-genre]', saved.genre);
+      const favoritesToggle = document.querySelector('#favoritesToggle');
+      const favoritesPressed = favoritesToggle?.getAttribute('aria-pressed') === 'true';
+      if (Boolean(saved.favoritesOnly) !== favoritesPressed) favoritesToggle?.click();
+    } finally {
+      restoringState = false;
     }
   }
 
@@ -217,6 +225,7 @@
   audio?.addEventListener('playing', updateMediaSession);
   audio?.addEventListener('pause', updateMediaSession);
   document.addEventListener('visibilitychange', updateSleepTimer);
+  document.addEventListener('web-radio:player-state-updated', restoreFilters);
   window.addEventListener('pageshow', updateSleepTimer);
 
   buildControls();
