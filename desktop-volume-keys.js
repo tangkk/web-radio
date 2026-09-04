@@ -23,13 +23,14 @@
     const max = Number(volume.max || 1);
     const next = Math.min(max, Math.max(min, Math.round((Number(volume.value) + direction * step) * 100) / 100));
     volume.value = String(next);
+    audio.volume = next;
     volume.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   document.addEventListener('keydown', event => {
     if (shouldIgnore(event)) return;
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    if (event.key !== '-' && event.key !== '=') return;
     event.preventDefault();
-    changeVolume(event.key === 'ArrowRight' ? 1 : -1);
+    changeVolume(event.key === '=' ? 1 : -1);
   });
 })();
