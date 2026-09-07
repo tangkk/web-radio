@@ -25,7 +25,6 @@ const elements = {
   playerStatus: document.querySelector('#playerStatus'),
   volume: document.querySelector('#volumeControl'),
   closePlayer: document.querySelector('#closePlayer'),
-  debugToggle: document.querySelector('#debugToggle'),
   debugPanel: document.querySelector('#debugPanel'),
   debugLog: document.querySelector('#debugLog'),
   copyDebug: document.querySelector('#copyDebug'),
@@ -302,12 +301,6 @@ elements.volume.addEventListener('input', event => {
 });
 
 elements.closePlayer.addEventListener('click', stopPlayer);
-elements.debugToggle.addEventListener('click', () => {
-  const open = elements.debugPanel.hidden;
-  elements.debugPanel.hidden = !open;
-  elements.debugToggle.classList.toggle('active', open);
-  elements.debugToggle.setAttribute('aria-expanded', String(open));
-});
 elements.clearDebug.addEventListener('click', () => {
   debugEntries.length = 0;
   elements.debugLog.textContent = '';
