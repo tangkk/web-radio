@@ -1,5 +1,5 @@
 .player-inner {
-  grid-template-columns: auto minmax(0,1fr) auto auto auto auto auto;
+  grid-template-columns: auto minmax(0,1fr) auto auto auto auto;
 }
 
 .station-navigation {
@@ -28,7 +28,7 @@
 .sleep-timer-status { display: block; margin-top: 3px; color: var(--accent); text-align: right; white-space: nowrap; }
 
 @media (max-width: 900px) {
-  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto auto; }
+  .player-inner { grid-template-columns: auto minmax(0,1fr) auto auto auto; }
   .volume { display: none; }
 }
 
@@ -54,9 +54,17 @@
   .station-navigation,
   .sleep-control,
   .volume,
-  .debug-toggle,
   .close-player {
     align-self: center;
+  }
+
+  .close-player {
+    display: grid;
+    place-items: center;
+    width: 31px;
+    height: 31px;
+    padding: 0;
+    line-height: 1;
   }
 
   .sleep-control {
