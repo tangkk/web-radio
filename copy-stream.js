@@ -21,8 +21,14 @@
     if (!copied) throw new Error('Copy failed');
   }
 
+  function originalStreamUrl() {
+    if (typeof state !== 'undefined' && state.current?.stream) return state.current.stream;
+    const source = audio.currentSrc || audio.src || '';
+    return source.startsWith('blob:') ? '' : source;
+  }
+
   button.addEventListener('click', async () => {
-    const source = audio.currentSrc || audio.src;
+    const source = originalStreamUrl();
     if (!source) return;
 
     const original = button.textContent;
@@ -30,11 +36,11 @@
       await copyText(source);
       button.textContent = '✓';
       button.classList.add('copied');
-      button.setAttribute('aria-label', '播放源地址已複製');
+      button.setAttribute('aria-label', '原始播放源地址已複製');
       window.setTimeout(() => {
         button.textContent = original;
         button.classList.remove('copied');
-        button.setAttribute('aria-label', '複製播放源地址');
+        button.setAttribute('aria-label', '複製原始播放源地址');
       }, 1200);
     } catch (error) {
       button.textContent = '!';
